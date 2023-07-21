@@ -32,13 +32,28 @@ public class EloquaEventflowRestEndpoint {
 	LocalDateTime ldt1 = LocalDateTime.now();
 	
 	@PostMapping(path= "/account/{accountToken}/{eventType}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> addEmployee(@RequestBody String payload,
+    public ResponseEntity<Object> eloquaRestEndpoint(@RequestBody String payload,
     		@PathVariable(value="accountToken") final String accountToken,
     		@PathVariable(value="eventType") final String eventType) 
     {
 		LocalDateTime ldt2 = LocalDateTime.now();
 		long elapseInMs = Math.abs(ChronoUnit.MILLIS.between(ldt1,ldt2));
 		System.out.println("Elapse in "+ elapseInMs+" ms - Time: "+ LocalDateTime.now()+ "- Counter "+ counter.getAndIncrement()+" Receiving " + accountToken +" - " + eventType);
+        System.out.println(payload);
+        System.out.println();
+        ldt1 =ldt2;
+        
+        return ResponseEntity.ok(payload);
+      
+    }
+	
+	@PostMapping(path= "/account/{accountToken}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> externalClientRestEndpoint(@RequestBody String payload,
+    		@PathVariable(value="accountToken") final String accountToken) 
+    {
+		LocalDateTime ldt2 = LocalDateTime.now();
+		long elapseInMs = Math.abs(ChronoUnit.MILLIS.between(ldt1,ldt2));
+		System.out.println("Elapse in "+ elapseInMs+" ms - Time: "+ LocalDateTime.now()+ "- Counter "+ counter.getAndIncrement()+" Receiving " + accountToken);
         System.out.println(payload);
         System.out.println();
         ldt1 =ldt2;
